@@ -1,0 +1,10 @@
+pip install cx-Oracle == 8.2.1
+pip install weasyprint == 52.5
+pip install pycairo == 1.20.1
+pip install djangorestframework == 3.12.4
+pip install scikit-learn == 0.24.2
+pip install xhtml2pdf == 0.2.5
+pip install selenium==3.141.0
+pip install requests==2.26.0
+pip install bs4==0.0.1
+pip install Django==3.2.5
