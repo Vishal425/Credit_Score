@@ -1,0 +1,14 @@
+{% extends 'score/base.html' %}
+
+{% block content %}
+
+<h1>Our blog List </h1>
+<u1>
+    {% for list in blog_list %}
+        <li>{{list}}</li>
+    {% endfor %}
+</u1>
+
+
+
+{% endblock %}

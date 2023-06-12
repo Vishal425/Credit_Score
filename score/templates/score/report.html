@@ -1,0 +1,528 @@
+{% extends 'score/base.html' %}
+
+
+    {% block content %}
+
+      <style>
+        .table {
+            width: 100%;
+            margin-bottom: 30px;
+            border-collapse: collapse;
+            }
+        th {
+            background-color:rgb(255, 255, 255);
+            Color:white;
+        }
+        th, td {
+            width:200px;
+            text-align:center;
+            border:1px solid black;
+            padding:3px
+          
+        }
+        .geeks {
+            border-right:hidden;
+        }
+        .gfg {
+            border-collapse:separate;
+            border-spacing:0 15px;
+        }
+        h1 {
+            color:rgb(0, 0, 0);
+        }
+
+        h2 {
+        color: #ec0511;
+
+        }
+    </style>
+
+
+
+<h1> <u> CREDIT REPORT </u>  </h1>  
+
+
+
+<h2>PERSONAL INFORMATION:</h2>
+
+<table>
+    <tr>
+        <th>CUSTOMER NAME</th>
+        <th>DATE OF BIRTH</th>
+        <th>CUSTOMER AGE</th>
+        <th>CUSTOMER GENDER</th>
+    </tr>
+
+    <tr>
+        <th>{{json_Values.0.CUSTOMER_NAME}}</th>
+        <th>{{json_Values.0.DATE_OF_BIRTH}}</th>
+        <th>{{json_Values.0.CUSTOMER_AGE}}</th>
+        <th>{{json_Values.0.CUSTOMER_GENDER}}</th>
+    </tr>
+
+</table>
+
+<br>
+
+<table>
+    <tr>
+        <th>MARTIAL STATUS</th>
+        <th>PERMANENT ADDRESS</th>
+        <th>HOUSE OWN</th>
+        <th>VEHICAL OWN</th>
+    </tr>
+    <tr>
+        <th> {{json_Values.0.MARTIAL_STATUS}}</th>
+        <th>{{json_Values.0.PERMANENT_ADD}} </th>
+        <th> {{json_Values.0.HOUSE_OWN}}</th>
+        <th> {{json_Values.0.CAR_MOTOR_OWN}}</th>
+    </tr>
+
+</table>
+
+
+
+<h2>LOAN APPROVAL:</h2>
+
+<table>
+    <tr>
+        <th>CREDIT SCORE</th>
+        <th>ELIGIBLE FOR LOAN</th>
+        <th> NPA BY PREDICTION </th>
+        <th> NPA BY BANK FLAG </th>
+    </tr>
+    <tr>
+        <th>{{json_Values.0.CREDIT_SCORE}}</th>
+        <th>{% if json_Values.0.CREDIT_SCORE > 650 %}
+            <p> YES </p>
+       {% else %}
+            <p> NO </p>
+       {% endif %}</th>
+       <th>{{json_Values.0.NPA_LOG}}</th>
+       <th>{{json_Values.0.NPA_FLAG}}</th>
+    </tr>
+
+</table>
+
+
+
+<h2>CONTACT DETAILS:</h2>
+
+<table>
+    <tr>
+        <th>MOBILE NUMBER</th>
+        <th>EMAIL ADDRESS</th>
+    </tr>
+    <tr>
+        <th>{{json_Values.0.MOBILE_NO}}</th>
+        <th>{{json_Values.0.EMAIL_ID}}</th>
+    </tr> 
+
+</table>
+
+<H2>IDENTIFICATION TYPE :</H2>  
+
+<table>
+    <tr>
+        <th>AADHAAR CARD</th>
+        <th>PAN</th>
+        <th>DOMICILE</th>
+        <th>COMMUNITY</th>
+        <th>KYC</th>
+    </tr>
+    <tr>
+        <th>{{json_Values.0.AADHAAR_CARD}}</th>
+        <th>{{json_Values.0.PAN}}</th>
+        <th>{{json_Values.0.DOMICILE_DESC}}</th>
+        <th>{{json_Values.0.COMMUNITY_DESC}}</th>
+        <th>{{json_Values.0.KYC_COMPLETE_FLAG}} </th>
+
+    </tr>
+cd 
+</table>
+
+<H2>CUSTOMER DETAILS :</H2>
+
+<table>
+    <tr>
+        <th>CUSTOMER TYPE</th>
+        <th>OCCUPATION</th>
+        <th>EDUCATION</th>
+    </tr>
+    <tr>
+        <th>{{json_Values.0.CUSTOMER_TYPE}}</th>
+        <th>{{json_Values.0.OCCUPATION_DESC}}</th>
+        <th>{{json_Values.0.EDUCATION_DESC}}</th>
+        
+    </tr>
+</table>
+
+<H2>CUSTOMER SERVICES:</H2>
+<table>
+    <tr>
+        <th>CREDIT CARD</th>
+        <th>DEBIT CARD</th>
+        <th>SMS BANKING</th>
+        <th>MOBILE BANKING</th>
+        <th>NET BANKING</th>
+        
+    </tr>
+    <tr>
+        <th>{{json_Values.0.CREDIT_CARD_FLAG}}</th>
+        <th>{{json_Values.0.DEBIT_CARD_FLAG}}</th>
+        <th>{{json_Values.0.SMS_BANKING_FLAG}}</th>
+        <th>{{json_Values.0.MOBILE_BANKING_FLAG}}</th>
+        <th>{{json_Values.0.NET_BANKING_FLAG}}</th>
+    </tr>
+</table>
+
+
+<H2>BANKING DETAILS SUMMARY:</H2>
+<table>
+    <tr>
+        <th>TOTAL NUMBER OF LOAN ACCOUNT</th>
+        <th>ANNUAL INCOME</th>
+        <th>SUREITY COUNTE</th>
+        <th>SUREITY AMOUNT</th>
+    </tr>
+    <tr>
+        <th>{{ json_Values|length }}</th>
+        <th>{{json_Values.0.ANNUAL_INCOME}}</th>
+        <th>{{json_Values.0.SUREITY_COUNT}}</th>
+        <th>{{json_Values.0.SUREITY_AMOUNT}}</th>
+    </tr>
+
+</table>
+
+<br>
+
+<H2>ACCOUNTS DETAILS:</H2>
+
+{% for json_Value in json_Values %}
+
+    <h1><u>LOAN NUMBER: {{forloop.counter}}</u></h1>
+    <br>
+    <table>
+        <tr>
+            <th>ACCOUNT NUMBER</th>
+            <th>ACCOUNT OPEN DATE</th>
+            <th>ACCOUNT TYPE</th>
+            <th>ACCOUNT STATUS</th>
+            <th>ACCOUNT STATUS DATE</th>        
+        </tr>
+
+
+        <tr>
+            <th>{{ json_Value.NEW_AC_NUMBER | floatformat }}</th>
+            <th>{{json_Value.ACCOUNT_OPEN_DATE}}</th>
+            <th>{{json_Value.GLTITLE}}</th>
+            <th>{{json_Value.STATUS_CODE}}</th>
+            <th>{{json_Value.ACCOUNT_STATUS_DATE}}</th>
+            
+        </tr>
+    
+    </table>
+
+    <br>
+
+
+    <table>
+        <tr>
+            <th>AVRAGE BALANCE IN ACCOUNT </th>
+            <th>SECURITY VALUE</th>
+            <!-- <th>NPA STATUS </th> -->            
+        </tr>
+
+        <tr>
+            <th>{{json_Value.AVG_BAL_IN_ACCOUNT}}</th>
+            <th>{{json_Value.SECURITY_VALUE}}</th>
+            <!-- <th>{{json_Value.NPA}}</th> -->           
+        </tr>
+    </table>
+
+    <br>
+
+
+    
+
+    <table>
+        <tr>
+            <th>SANCTIONED AMOUNT </th>
+            <th>SANCTION DATE </th>
+            <th>INTEREST RATE</th>
+            <th>PERIOD IN MONTHS</th> 
+            <th>EXPIRY DATE</th>
+            <th>DISBURSEMENT AMOUNT</th>
+            
+        </tr>
+
+        <tr>
+            <th>{{json_Value.SANCTION_AMOUNT}}</th>
+            <th>{{json_Value.SANCTION_DATE}}</th>
+            <th>{{json_Value.INTEREST_RATE}}</th>
+            <th>{{json_Value.PERIOD_MONTHS}}</th>
+            <th>{{json_Value.EXPIRY_DATE}}</th>
+            <th>{{json_Value.DISBURSEMENT_AMOUNT}}</th>
+        </tr>
+    </table>
+    
+    <br>
+
+    <table>
+        <tr>
+            <th>EMI </th>
+            <th>TOTAL INTEREST RECEIVED </th>
+            <th>LAST INTEREST RECEIVED DATE</th>
+            <th>LAST INTEREST RECEIVED AMOUNT</th> 
+           
+        </tr>
+
+        <tr>
+            <th>{{json_Value.EMI_AMOUNT}}</th>
+            <th>{{json_Value.TOTAL_INTT_RECEIVED}}</th>
+            <th>{{json_Value.LAST_INTT_RECEIVED_DT}}</th>
+            <th>{{json_Value.LAST_INTT_RECEIVED_AMT}}</th>
+
+        </tr>
+    </table>
+
+    <br>
+
+    <h2>TOTAL NUMBER OF TRANSACTION BY:</h2>
+
+   <table>
+        <tr>
+            <th>CASH COUNT </th>
+            <th>TRANSFER COUNT </th>
+            <th>CLEARING COUNT</th>
+            <th>CHEQUE COUNT</th>
+            <th>RTGS COUNT</th>
+            <th>ATM COUNT</th> 
+           
+        </tr>
+
+        <tr>
+            <th>{{json_Value.TOTAL_NOOFTRAN_BYCASH_CNT}}</th>
+            <th>{{json_Value.TOTAL_NOOFTRAN_BYTRF_CNT}}</th>
+            <th>{{json_Value.TOTAL_NOOFTRAN_BYCLG_CNT}}</th>
+            <th>{{json_Value.TOTAL_NOOFTRAN_BYCHEQUE_CNT}}</th>
+            <th>{{json_Value.TOTAL_NOOFTRAN_BYRTGS_CNT}}</th>
+            <th>{{json_Value.TOTAL_NOOFTRAN_BYATM_CNT}}</th>
+
+        </tr>
+    </table>
+    
+    <br>
+
+
+    <h2>TOTAL NUMBER OF CREDIT:</h2>
+
+    <table>
+         <tr> 
+             
+             <th>CASH TRANSACTION COUNT </th>
+             <th>TRANSFER TRANSACTION COUNT </th>
+             <th>CLEARING TRANSACTION COUNT</th>
+             <th>TRANSACTION COUNT</th>
+                 
+         </tr>
+ 
+         <tr>
+
+             <th>{{json_Value.TOTAL_NOOF_CR_CASH_TRAN_CNT}}</th>
+             <th>{{json_Value.TOTAL_NOOF_CR_TRF_TRAN_CNT}}</th>
+             <th>{{json_Value.TOTAL_NOOF_CR_CLG_TRAN_CNT}}</th>
+             <th>{{json_Value.TOTAL_NOOF_CR_TRAN_CNT}}</th>
+
+ 
+         </tr>
+     </table>
+
+     <br>
+
+
+     <h2>TOTAL NUMBER OF DEBIT:</h2>
+
+     <table>
+          <tr> 
+              
+              <th>CASH TRANSACTION COUNT </th>
+              <th>TRANSFER TRANSACTION COUNT </th>
+              <th>CLEARING TRANSACTION COUNT</th>
+              <th>TRANSACTION COUNT</th>
+                  
+          </tr>
+  
+          <tr>
+ 
+              <th>{{json_Value.TOTAL_NOOF_DR_CASH_TRAN_CNT}}</th>
+              <th>{{json_Value.TOTAL_NOOF_DR_TRF_TRAN_CNT}}</th>
+              <th>{{json_Value.TOTAL_NOOF_DR_CLG_TRAN_CNT}}</th>
+              <th>{{json_Value.TOTAL_NOOF_DR_TRAN_CNT}}</th>
+ 
+  
+          </tr>
+      </table>
+
+      <br>
+
+
+      <h2>AVERAGE CREDIT :</h2>
+
+      <table>
+        <tr> 
+            
+            <th>CASH IN AMOUNT</th>
+            <th>TRANSFER IN AMOUNT </th>
+            <th>CLEARING IN AMOUNT</th>
+                
+        </tr>
+
+        <tr>
+
+            <th>{{json_Value.AVG_CR_IN_CASH_IN_AMOUNT}}</th>
+            <th>{{json_Value.AVG_CR_IN_TRF_IN_AMOUNT}}</th>
+            <th>{{json_Value.AVG_CR_IN_CLG_IN_AMOUNT}}</th>
+
+        </tr>
+        </table>
+
+          <br>
+
+    
+            <h2>AVERAGE DEBIT: </h2>
+
+        <table>
+            <tr> 
+                
+                <th>CASH IN AMOUNT</th>
+                <th>TRANSFER IN AMOUNT </th>
+                <th>CLEARING IN AMOUNT</th>
+                    
+            </tr>
+
+            <tr>
+
+                <th>{{json_Value.AVG_DR_IN_CASH_IN_AMOUNT}}</th>
+                <th>{{json_Value.AVG_DR_IN_TRF_IN_AMOUNT}}</th>
+                <th>{{json_Value.AVG_DR_IN_CLG_IN_AMOUNT}}</th>
+
+            </tr>
+        </table>
+
+        <br>
+
+
+{% endfor %}
+
+
+
+
+
+
+    <!-- {% for json_Value in json_Values %}
+    
+    <ul>
+        <li>CREDIT SCORE:                    {{json_Value.CREDIT_SCORE}}</li>
+        <li>NPA:                             {{json_Value.NPA}}</li>
+        <li>CUSTOMER NAME:                   {{json_Value.CUSTOMER_NAME}}</li>
+        <li>CUSTOMER BANK NAME:              {{json_Value.CUSTOMER_BANK_NAME}}</li>
+        <li>ADDRESS PROOF DETAILS:           {{json_Value.ADDRESS_PROOF_DETAILS}}</li>
+        <li>KYC COMPLETE FLAG:               {{json_Value.KYC_COMPLETE_FLAG}}</li>
+        <li>GST NO:                          {{json_Value.GST_NO}}</li>
+        <li>GST REGISTRATION DATE:           {{json_Value.GST_REG_DATE}}</li>
+        <li>PERMANENT ADDRESS:               {{json_Value.PERMANENT_ADD}}</li>
+        <li>HOUSE OWN:                       {{json_Value.HOUSE_OWN}}</li>
+        <li>VEHICAL OWN:                     {{json_Value.CAR_MOTOR_OWN}}</li>
+        <li>CURRENT LIABALITY AMOUNT:        {{json_Value.CURR_LIAB_AMT}}</li>
+        <li>LOAN ACCOUNT HOLD FROM MONTHS:   {{json_Value.LOAN_AC_HOLD_FRM_MTHS}}</li>
+        <li>CURRENT BALANCE:                 {{json_Value.CURRENT_BAL}}</li>
+        <li>NEW ACCOUNT NUMBER:              {{json_Value.NEW_AC_NUMBER}}</li>
+        <li>ACCOUNT OPEN DATE:               {{json_Value.ACCOUNT_OPEN_DATE}}</li>
+        <li>ADDITIONAL LOAN :                {{json_Value.ADDITIONAL_YN}}</li>
+        <li>AVERAGE BALANCE IN ACCOUNT:      {{json_Value.AVG_BAL_IN_ACCOUNT}}</li>
+        <li>AVERAGE CREDIT IN CASH AMOUNT:   {{json_Value.AVG_CR_IN_CASH_IN_AMOUNT}}</li>
+        <li>AVERAGE CREDIT IN CLEARING AMOUNT:  {{json_Value.AVG_CR_IN_CLG_IN_AMOUNT}}</li>
+        <li>AVERAGE CREDIT IN TRANSFER AMOUNT:  {{json_Value.AVG_CR_IN_TRF_IN_AMOUNT}}</li>
+        <li>AVERAGE DEBIT IN CASH AMOUNT:       {{json_Value.AVG_DR_IN_CASH_IN_AMOUNT}}</li>
+        <li>AVERAGE DEBIT IN CLEARING AMOUNT:   {{json_Value.AVG_DR_IN_CLG_IN_AMOUNT}}</li>
+        <li>AVERAGE DEBIT INTRANSFER AMOUNT :   {{json_Value.AVG_DR_IN_TRF_IN_AMOUNT}}</li>
+        <li>CASH SECURITY FLAG:                 {{json_Value.CASH_SECURITY_FLAG}}</li>
+        <li>DISBURSEMENT AMOUNT:                {{json_Value.DISBURSEMENT_AMOUNT}}</li>
+        <li>DP AMOUNT:                          {{json_Value.DP_AMOUNT}}</li>
+        <li>EMI AMOUNT:                         {{json_Value.EMI_AMOUNT}}</li>
+        <li>EXPIRY DATE:                        {{json_Value.EXPIRY_DATE}}</li>
+        <li>INTEREST RATE:                      {{json_Value.INTEREST_RATE}}</li>
+        <li>LAST INTREST RECEIVED AMOUNT:       {{json_Value.LAST_INTT_RECEIVED_AMT}}</li>
+        <li>LAST INTREST RECEIVED DATE:         {{json_Value.LAST_INTT_RECEIVED_DT}}</li>
+        <li>NET SECURITY VALUE:                 {{json_Value.NET_SECURITY_VALUE}}</li>
+        <li>OVERDUE AMOUNT:                     {{json_Value.OVERDUE_AMT}}</li>
+        <li>OVERDUE PERIOD:                     {{json_Value.OVERDUE_PRD}}</li>
+        <li>PENAL AMT:                          {{json_Value.PENAL_AMT}}</li>
+        <li>PERIOD MONTHS:                      {{json_Value.PERIOD_MONTHS}}</li>
+        <li>PRINCIPAL BALANCE:                  {{json_Value.PRINCIPAL_BALANCE}}</li>
+        <li>RECEIVABLE BALANCE:                 {{json_Value.RECEIVABLE_BALANCE}}</li>
+        <li>RENEWAL YN:                         {{json_Value.RENEWAL_YN}}</li>
+        <li>SANCTION AMOUNT:                    {{json_Value.SANCTION_AMOUNT}}</li>
+        <li>SANCTION DATE:                      {{json_Value.SANCTION_DATE}}</li>
+        <li>SECURITY VALUE:                     {{json_Value.SECURITY_VALUE}}</li>
+        <li>SUBSIDY APPLIED FLAG:               {{json_Value.SUBSIDY_APPLIED_FLAG}}</li>
+        <li>TOTAL INTREST RECEIVED:             {{json_Value.TOTAL_INTT_RECEIVED}}</li>
+        <li>TOTAL NUMBER OF TRANSFER BYATM COUNT:           {{json_Value.TOTAL_NOOFTRAN_BYATM_CNT}}</li>
+        <li>TOTAL NUMBER OF TRANFER BYCASH COUNT:           {{json_Value.TOTAL_NOOFTRAN_BYCASH_CNT}}</li>
+        <li>TOTAL NUMBER OF TRANSFER  BY CHEQUE COUNT:      {{json_Value.TOTAL_NOOFTRAN_BYCHEQUE_CNT}}</li>
+        <li>TOTAL NUMBER OF TRANSACTION BY CLEARING COUNT:  {{json_Value.TOTAL_NOOFTRAN_BYCLG_CNT}}</li>
+        <li>TOTAL NUMBER OF TRANSFER BY RTGS COUNT:         {{json_Value.TOTAL_NOOFTRAN_BYRTGS_CNT}}</li>
+        <li>TOTAL NUMNER OF TRANSCATION BY TRF CNT:         {{json_Value.TOTAL_NOOFTRAN_BYTRF_CNT}}</li>
+        <li>TOTAL NUMBER OF CREDIT CASH TRANSFER COUNT:     {{json_Value.TOTAL_NOOF_CR_CASH_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF CREDIT CLEARING TRANSFER COUNT: {{json_Value.TOTAL_NOOF_CR_CLG_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF CREDIT TRANSCATION COUNT:       {{json_Value.TOTAL_NOOF_CR_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF CREDIT TRANSFER TRANSACTION COUNT: {{json_Value.TOTAL_NOOF_CR_TRF_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF DEBIT CASH TRANSACTION COUNT: {{json_Value.TOTAL_NOOF_DR_CASH_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF DEBIT CLEARING TRANSACTION COUNT:  {{json_Value.TOTAL_NOOF_DR_CLG_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF DEBIT TRANSACTION COUNT:      {{json_Value.TOTAL_NOOF_DR_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF DEBIT TRANSFER COUNT:  {{json_Value.TOTAL_NOOF_DR_TRF_TRAN_CNT}}</li>
+        <li>TOTAL NUMBER OF TRANSFER:            {{json_Value.TOTAL_NOOF_TRAN}}</li>
+        <li>VALUE DESCRIPTION:           {{json_Value.VALUE_DESCRIPTION}}</li>
+        <li>AVRAGE BALANCE IN ACCOUNT SAVING ACTIVE: {{json_Value.AVG_BAL_IN_ACCOUNT_SAVING_ACTIVE}}</li>
+        <li>AVRAGE BALANCE IN ACCOUNT SAVING CLOSED: {{json_Value.AVG_BAL_IN_ACCOUNT_SAVING_CLOSED}}</li>
+        <li>AVRAGE BALANCE IN ACCOUNT CURRENT ACTIVE: {{json_Value.AVG_BAL_IN_ACCOUNT_CURRENT_ACTIVE}}</li>
+        <li>AVRAGE BALANCE IN ACCOUNT CURRENT CLOSED: {{json_Value.AVG_BAL_IN_ACCOUNT_CURRENT_CLOSED}}</li>
+        <li>BALANCE AMOUNT SAVING ACTIVE:    {{json_Value.BALANCE_AMOUNT_SAVING_ACTIVE}}</li>
+        <li>BALANCE AMOUNT SAVING CLOSED:    {{json_Value.BALANCE_AMOUNT_SAVING_CLOSED}}</li>
+        <li>BALANCE AMOUNT CURRENT ACTIVE:   {{json_Value.BALANCE_AMOUNT_CURRENT_ACTIVE}}</li>
+        <li>BALANCE AMOUNT CURRENT CLOSED:   {{json_Value.BALANCE_AMOUNT_CURRENT_CLOSED}}</li>
+        <li>TOTAL INTEREST PAID SAVING ACTIVE:   {{json_Value.TOTAL_INTT_PAID_SAVING_ACTIVE}}</li>
+        <li>TOTAL INTEREST PAID SAVING CLOSED:   {{json_Value.TOTAL_INTT_PAID_SAVING_CLOSED}}</li>
+        <li>TOTAL INTEREST PAID CURRENT ACTIVE:  {{json_Value.TOTAL_INTT_PAID_CURRENT_ACTIVE}}</li>
+        <li>TOTAL INTEREST PAID CURRENT_CLOSED:  {{json_Value.TOTAL_INTT_PAID_CURRENT_CLOSED}}</li>
+        <li>CHEQUE BOUNCE AMOUNT CURRENT AND SAVING ACCOUNT:      {{json_Value.CHEQUE_BOUNCE_AMOUNT_CASA}}</li>
+        <li>CHEQUE BOUNCE CHARGES CURRENT AND SAVING ACCOUNT:     {{json_Value.CHEQUE_BOUNCE_CHARGES_CASA}}</li>
+        <li>CHEQUE BOUNCE COUNT CURRENT AND SAVING ACCOUNT:         {{json_Value.CHEQUE_BOUNCE_CNT_CASA}}</li>
+        <li>DEPOSIT AMOUNT FDRD ACTIVE:    {{json_Value.DEPOSIT_AMOUNT_FDRD_ACTIVE}}</li>
+        <li>DEPOSIT AMOUNT FDRD CLOSED:    {{json_Value.DEPOSIT_AMOUNT_FDRD_CLOSED}}</li>
+        <li>MATURITY AMOUNT FDRD ACTIVE:    {{json_Value.MATURITY_AMOUNT_FDRD_ACTIVE}}</li>
+        <li>MATURITY AMOUNT FDRD ACTIVE:    {{json_Value.MATURITY_AMOUNT_FDRD_ACTIVE}}</li>
+        <li>TOTAL PAYABLE INTEREST FDRD ACTIVE: {{json_Value.TOTAL_PAYABLE_INTEREST_FDRD_ACTIVE}}</li>
+        <li>TOTAL PAYABLE INTEREST FDRD CLOSED: {{json_Value.TOTAL_PAYABLE_INTEREST_FDRD_CLOSED}}</li>
+        <li>TOTAL NUMBER OF CREDIT TRANSFER COUNT SAVING:     {{json_Value.TOTAL_PAYABLE_INTEREST_FDRD_CLOSED}}</li>
+        <li>TOTAL NUMBER OFDEBIT TRANSFER COUNT SAVING:     {{json_Value.TOTAL_NOOF_DR_TRAN_CNT_SAVING}}</li>
+        <li>TOTAL NUMBER OF TRANSFER SAVING:            {{json_Value.TOTAL_NOOF_TRAN_SAVING}}</li>
+        <li>TOTAL NUMBER OF CREDIT TRANSFER COUNT CURRENT:    {{json_Value.TOTAL_NOOF_CR_TRAN_CNT_CURRENT}}</li>
+        <li>TOTAL NUMBER OF DEBIT TRANSFER COUNT CURRENT:    {{json_Value.TOTAL_NOOF_DR_TRAN_CNT_CURRENT}}</li>
+        <li>TOTAL NUMBER OF DEBIT TRANSFER COUNT CURRENT:    {{json_Value.TOTAL_NOOF_DR_TRAN_CNT_CURRENT}}</li>
+        <li>TOTAL NUMBER OF TRANSFER CURRENT:           {{json_Value.TOTAL_NOOF_TRAN_CURRENT}}</li>
+        <li>TOTAL NUMBER OF ACCOUNT:               {{json_Value.TOTAL_NO_OF_ACCOUNT}}</li>
+        <li>TOTAL NUMBER OF LOAN ACCOUNT:          {{json_Value.TOTAL_NO_OF_LOAN_ACCOUNT}}</li>
+        <li>LOAN TYPE:                         {{json_Value.LOAN_TYPE}}</li>
+        </ul> 
+    
+    {% endfor %} -->
+
+   
+{% endblock %} 
+
+    
+
+
+
